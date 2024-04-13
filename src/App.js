@@ -7,6 +7,7 @@ function App() {
     <>
       <Header />
       <Main />
+      {/* 課題1解きましたよ */}
     </>
 
   );
