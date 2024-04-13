@@ -13,7 +13,7 @@ const Main = () => {
                 <div className="dateAndCategories">
                   <p className="date">{new Date(post.createdAt).toLocaleDateString()}</p>
                   <ul className="categories">
-                    {post.categories.map(category => {return <li>{category}</li>})}
+                    {post.categories.map(category => {return <li key={category}>{category}</li>})}
                   </ul>
                 </div>
                 <h3 className="title">{`APIで取得した${post.title}`}</h3>  
