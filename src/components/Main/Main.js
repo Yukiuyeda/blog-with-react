@@ -9,7 +9,7 @@ const Main = () => {
       <ul className="posts">
         {posts.map(post => {
           return (<li key={post.id}>
-            <Link to={`/post/${post.id}`}>
+            <Link to={`/posts/${post.id}`}>
               <div className="post">
                 <div className='postContent'>
                   <div className="dateAndCategories">
@@ -18,7 +18,7 @@ const Main = () => {
                       {post.categories.map(category => {return <li key={category}>{category}</li>})}
                     </ul>
                   </div>
-                  <h3 className="title">{`APIで取得した${post.title}`}</h3>  
+                  <div className="title">{`APIで取得した${post.title}`}</div>  
                   <div className='content' dangerouslySetInnerHTML={{__html: post.content}}></div>
                 </div>  
               </div> 
