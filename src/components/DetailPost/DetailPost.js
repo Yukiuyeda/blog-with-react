@@ -5,21 +5,27 @@ import styles from "./DetailPost.module.css"
 
 const DetailPost = () => {
     const { id } = useParams();
-    const found = posts.find(post => post.id === Number(id));
-    // console.log(found);
+    const post = posts.find(post => post.id === Number(id));
+    // console.log(post);
+
+    //記事が見つからなかったとき(postがundefinedのとき)
+    if (!post) {
+        return <div>記事が見つかりません</div>
+    };
+
     return (
         <div>
             <div className={styles.container}>
-                <img src={found.thumbnailUrl} />
+                <img src={post.thumbnailUrl} />
                 <div className={styles.article}>
                     <div className={styles.dateAndCategories}>
-                        <p className={styles.date}>{new Date(found.createdAt).toLocaleDateString()}</p>
+                        <p className={styles.date}>{new Date(post.createdAt).toLocaleDateString()}</p>
                         <ul className={styles.categories}>
-                            {found.categories.map(category => {return <li key={category}>{category}</li>})}
+                            {post.categories.map(category => {return <li key={category}>{category}</li>})}
                         </ul>
                     </div>
-                    <h3 className={styles.title}>{`APIで取得した${found.title}`}</h3>
-                    <div className='detailContent' dangerouslySetInnerHTML={{__html: found.content}}></div>
+                    <h3 className={styles.title}>{`APIで取得した${post.title}`}</h3>
+                    <div className='detailContent' dangerouslySetInnerHTML={{__html: post.content}}></div>
                 </div>
             </div>
                 
