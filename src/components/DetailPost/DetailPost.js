@@ -5,9 +5,8 @@ import styles from "./DetailPost.module.css"
 
 const DetailPost = () => {
     const { id } = useParams();
-    // console.log(id);
     const found = posts.find(post => post.id === Number(id));
-    // console.log(found)
+    // console.log(found);
     return (
         <div>
             <div className={styles.container}>
