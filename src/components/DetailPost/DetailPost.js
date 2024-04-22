@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { posts } from '../../data/posts';
-import "./DetailPost.css"
+import styles from "./DetailPost.module.css"
 
 const DetailPost = () => {
     const { id } = useParams();
@@ -10,16 +10,16 @@ const DetailPost = () => {
     // console.log(found)
     return (
         <div>
-            <div className="detailContainer">
+            <div className={styles.container}>
                 <img src={found.thumbnailUrl} />
-                <div className="detailArticle">
-                    <div className="detailDateAndCategories">
-                        <p className="detailDate">{new Date(found.createdAt).toLocaleDateString()}</p>
-                        <ul className="detailCategories">
+                <div className={styles.article}>
+                    <div className={styles.dateAndCategories}>
+                        <p className={styles.date}>{new Date(found.createdAt).toLocaleDateString()}</p>
+                        <ul className={styles.categories}>
                             {found.categories.map(category => {return <li key={category}>{category}</li>})}
                         </ul>
                     </div>
-                    <h3>{`APIで取得した${found.title}`}</h3>
+                    <h3 className={styles.title}>{`APIで取得した${found.title}`}</h3>
                     <div className='detailContent' dangerouslySetInnerHTML={{__html: found.content}}></div>
                 </div>
             </div>
