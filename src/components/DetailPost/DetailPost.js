@@ -8,7 +8,7 @@ const DetailPost = () => {
     const post = posts.find(post => post.id === Number(id));
     // console.log(post);
 
-    //記事が見つからなかったとき(postがundefinedのとき)
+    //記事が見つからなかったとき
     if (!post) {
         return <div>記事が見つかりません</div>
     };
