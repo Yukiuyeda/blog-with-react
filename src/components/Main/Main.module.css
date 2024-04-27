@@ -1,11 +1,14 @@
-li {
+.mainList {
     list-style: none;
 }
 
-.post {
+.mainLink {
+    text-decoration: none;
+}
+
+.postContainer {
     border: 1px solid #ccc;
-    padding: 18px;
-   
+    padding: 16px;
 }
 
 .dateAndCategories {
@@ -19,7 +22,7 @@ li {
     display: flex;
 }
 
-.categories li {
+.categoriesList {
     color:  #0068D3;
     border: 1px solid #0068D3;
     border-radius: 3px;
@@ -29,20 +32,21 @@ li {
     
 }
 
-h3 {
+.title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     font-weight: normal;
-    margin-top: 0.5rem
+    margin-top: 0.5rem;
+    color: black;
 }
 
 .posts {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    gap: 32px;
     margin:0; 
-    padding: 0
+    padding: 0;
+    max-width: 768px;
 }
 .date {
     color: #999;
@@ -51,9 +55,16 @@ h3 {
 .content {
     max-height: 48px;
     overflow: hidden;
+    color: black;
 }
 
-.posts {
-    padding: 40px 16px;
+.mainContainer {
     max-width: 800px;
+    margin: 40px auto;
+    padding: 0 18px;
 }
+
+.post {
+    max-width: 616px;
+}
+

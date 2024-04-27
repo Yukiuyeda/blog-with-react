@@ -1,4 +1,4 @@
-header {
+.header {
     background-color: #333333;
     display: flex;
     justify-content: space-between;
@@ -6,7 +6,7 @@ header {
     padding: 24px
 }
 
-a {
+.headerLink {
    text-decoration: none; 
    color: white;
 }
