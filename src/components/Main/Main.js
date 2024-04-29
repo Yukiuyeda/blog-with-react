@@ -1,11 +1,30 @@
-import React from 'react';
-import { posts } from '../../data/posts';
+import React, { useEffect, useState } from 'react';
+// import { posts } from '../../data/posts';
 import styles from "./Main.module.css"
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
+
+  const [posts, setPosts] = useState([])
+
+  // APIでpostsを取得する処理をuseEffectで実行します。
+  useEffect(() => {
+    const fetcher = async () => {
+      const res = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts")
+      const data = await res.json()
+      console.log(data);
+      setPosts(data.posts)
+    }
+
+    fetcher()
+  }, [])
+  
   return (
-    <div className={styles.mainContainer}>
+    <div>
+      {!posts ? (
+      <div>読み込み中…</div>
+    ):(
+      <div className={styles.mainContainer}>
       <ul className={styles.posts}>
         {posts.map(post => {
           return (<li key={post.id} className={styles.mainList}>
@@ -29,6 +48,9 @@ const Main = () => {
         })}
       </ul>
     </div>
+    )}
+    </div>
+    
       
   )
 }
