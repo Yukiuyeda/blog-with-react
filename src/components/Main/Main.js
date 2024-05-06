@@ -22,52 +22,51 @@ const Main = () => {
     fetcher();
   }, []);
 
+  //読み込み中の表示
+  if (isLoading) {
+    return <div>読み込み中…</div>
+  }
+
   return (
-    <div>
-      {isLoading ? (
-        <div>読み込み中…</div>
-      ) : (
-        <div className={styles.mainContainer}>
-          <ul className={styles.posts}>
-            {posts.map((post) => {
-              return (
-                <li key={post.id} className={styles.mainList}>
-                  <Link to={`/posts/${post.id}`} className={styles.mainLink}>
-                    <div className={styles.postContainer}>
-                      <div className={styles.post}>
-                        <div className={styles.dateAndCategories}>
-                          <p className={styles.date}>
-                            {new Date(post.createdAt).toLocaleDateString()}
-                          </p>
-                          <ul className={styles.categories}>
-                            {post.categories.map((category) => {
-                              return (
-                                <li
-                                  key={category}
-                                  className={styles.categoriesList}
-                                >
-                                  {category}
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        </div>
-                        <div
-                          className={styles.title}
-                        >{`APIで取得した${post.title}`}</div>
-                        <div
-                          className={styles.content}
-                          dangerouslySetInnerHTML={{ __html: post.content }}
-                        ></div>
-                      </div>
+    <div className={styles.mainContainer}>
+      <ul className={styles.posts}>
+        {posts.map((post) => {
+          return (
+            <li key={post.id} className={styles.mainList}>
+              <Link to={`/posts/${post.id}`} className={styles.mainLink}>
+                <div className={styles.postContainer}>
+                  <div className={styles.post}>
+                    <div className={styles.dateAndCategories}>
+                      <p className={styles.date}>
+                        {new Date(post.createdAt).toLocaleDateString()}
+                      </p>
+                      <ul className={styles.categories}>
+                        {post.categories.map((category) => {
+                          return (
+                            <li
+                              key={category}
+                              className={styles.categoriesList}
+                            >
+                              {category}
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </div>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
+                    <div
+                      className={styles.title}
+                    >{`APIで取得した${post.title}`}</div>
+                    <div
+                      className={styles.content}
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    ></div>
+                  </div>
+                </div>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
