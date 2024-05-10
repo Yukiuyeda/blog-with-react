@@ -16,60 +16,62 @@ const ContactForm = () => {
 
   //バリデーションチェック
   const validate = (values) => {
-    const errors = {};
+    const _errors = {};
     const regex =
       /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!values.name) {
-      errors.name = "お名前は必須です。";
+      _errors.name = "お名前は必須です。";
     } else if (values.name.length > 30) {
-      errors.name = "お名前は30文字以内で入力してください。";
+      _errors.name = "お名前は30文字以内で入力してください。";
     }
     if (!values.mailAddress) {
-      errors.mailAddress = "メールアドレスは必須です。";
+      _errors.mailAddress = "メールアドレスは必須です。";
     } else if (!regex.test(values.mailAddress)) {
-      errors.mailAddress = "正しいメールアドレスを入力してください。";
+      _errors.mailAddress = "正しいメールアドレスを入力してください。";
     }
     if (!values.content) {
-      errors.content = "本文は必須です。";
+      _errors.content = "本文は必須です。";
     } else if (values.content.length > 500) {
-      errors.content = "本文は500文字以内で入力してください。";
+      _errors.content = "本文は500文字以内で入力してください。";
     }
 
-    return errors;
+    setErrors(_errors);
+
+    if (Object.keys(_errors).length === 0) return true;
+
+    return false;
   };
 
   //送信ボタンをおしたとき
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //エラー内容を更新
-    setErrors(validate(formValues));
-    console.log(errors);
-    
-    //エラーオブジェクトのkey数が0のとき
-    if (Object.keys(errors).length === 0) {
-      //送信ボタンを無効に
-      setIsSubmitting(true);
-      await fetch(
-        "https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: formValues.name,
-            email: formValues.mailAddress,
-            message: formValues.content,
-          }),
-        }
-      );
 
-      alert("送信しました。");
-      //内容を初期化
-      setFormValues(initialValues);
-      //送信ボタンを有効に
-      setIsSubmitting(false);
-    }
+    //バリデーション失敗
+    if (!validate(formValues)) return;
+
+    //バリデーション成功したとき
+    //送信ボタンを無効に
+    setIsSubmitting(true);
+    await fetch(
+      "https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formValues.name,
+          email: formValues.mailAddress,
+          message: formValues.content,
+        }),
+      }
+    );
+
+    alert("送信しました。");
+    //内容を初期化
+    setFormValues(initialValues);
+    //送信ボタンを有効に
+    setIsSubmitting(false);
   };
 
   //クリアボタンで内容を初期化
