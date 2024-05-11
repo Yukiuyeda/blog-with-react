@@ -25,19 +25,27 @@
 }
 
 .label {
-    width: 30%;
+    width: 25%;
     display: flex;
     align-items: center;
 }
 
 .input, .textarea {
-    width: 70%;
+    width: 100%;
     padding: 15px;
     font-size: 1.2rem;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
+.inputAndError {
+    width: 75%;
+}
+
+.errorMessage {
+    margin: 0px;
+    color: #b91c1c
+}
 
 .textarea {
     height: 195px;
